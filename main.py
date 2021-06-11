@@ -6,8 +6,16 @@ root = Tk()
 root.geometry('500x500')
 root.title('Bloco de notas')
 
+
+
 text_space = Text(root, relief=FLAT)
 text_space.pack(expand=TRUE, fill=BOTH)
+
+scrollbar = Scrollbar(text_space, width=8)
+text_space.config(yscrollcommand=scrollbar.set)
+scrollbar.pack(side=RIGHT, fill=Y)
+scrollbar.config(command=text_space.yview)
+
 
 barra_menus = Menu(root)
 
