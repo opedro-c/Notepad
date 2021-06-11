@@ -1,5 +1,6 @@
 from tkinter import *
 from Arquivo import Arquivo
+from Editar import Editar
 
 root = Tk()
 root.geometry('500x500')
@@ -21,9 +22,10 @@ menu_arquivo.add_command(label='Fechar', command=lambda: arquivo.fechar_bloco(te
 barra_menus.add_cascade(label='Arquivo', menu=menu_arquivo)
 
 menu_editar = Menu(barra_menus, tearoff=0)
-menu_editar.add_command(label='Cortar', command=None)
-menu_editar.add_command(label='Copiar', command=None)
-menu_editar.add_command(label='Colar', command=None)
+editar = Editar()
+menu_editar.add_command(label='Recortar', command=lambda: editar.recortar(text_space))
+menu_editar.add_command(label='Copiar', command=lambda: editar.copiar(text_space))
+menu_editar.add_command(label='Colar', command=lambda: editar.colar(text_space))
 menu_editar.add_separator()
 menu_editar.add_command(label='Preferências', command=None)
 barra_menus.add_cascade(label='Editar', menu=menu_editar)

@@ -7,39 +7,40 @@ class Arquivo:
             ('Texto', '*.txt'),
             ('Python', '*.py'),
             ('Java', '*.java'),
-            ('HTML', '*.html')
+            ('HTML', '*.html'),
+            ('JavaScript', '*.js')
         )
     
 
-    def __init__(self):
-        self.__arquivo_atual = ''
-        self.__conteudo_arquivo = ''
+    def __init__(self) -> None:
+        self.__arquivo_atual: str = ''
+        self.__conteudo_arquivo: str = ''
 
     @property
-    def arquivo_atual(self):
+    def arquivo_atual(self) -> str:
         return self.__arquivo_atual
 
 
     @arquivo_atual.setter
-    def arquivo_atual(self, caminho):
+    def arquivo_atual(self, caminho: str) -> None:
         self.__arquivo_atual = caminho
 
 
     @property
-    def conteudo_arquivo(self):
+    def conteudo_arquivo(self) -> str:
         return self.__conteudo_arquivo
     
 
     @conteudo_arquivo.setter
-    def conteudo_arquivo(self, conteudo):
+    def conteudo_arquivo(self, conteudo: str) -> None:
         self.__conteudo_arquivo = conteudo
     
 
-    def arquivo_modificado(self, text_space):
+    def arquivo_modificado(self, text_space: Text) -> bool:
         return self.conteudo_arquivo != text_space.get('1.0', END)[:-1]
 
 
-    def perguntar_salvar(self, text_space):
+    def perguntar_salvar(self, text_space: Text) -> None:
         confirma = mb.askyesno(
             title='Bloco de Notas', 
             message='Você deseja salvar as alterações realizadas?'
@@ -50,7 +51,7 @@ class Arquivo:
             return
 
 
-    def novo_arquivo(self, text_space):
+    def novo_arquivo(self, text_space: Text) -> None:
         if self.arquivo_modificado(text_space):
             self.perguntar_salvar(text_space)
         self.conteudo_arquivo = ''
@@ -58,7 +59,7 @@ class Arquivo:
         text_space.delete('1.0', END)      
 
     
-    def abrir_arquivo(self, text_space):
+    def abrir_arquivo(self, text_space: Text) -> None:
         if self.arquivo_modificado(text_space):
             self.perguntar_salvar(text_space)
         caminho_arquivo = fd.askopenfilename(filetypes=Arquivo.filetypes)
@@ -70,7 +71,7 @@ class Arquivo:
                 text_space.insert('1.0', self.conteudo_arquivo)
 
     
-    def salvar_arquivo(self, text_space):
+    def salvar_arquivo(self, text_space: Text) -> None:
         if self.arquivo_atual:
             with open(self.arquivo_atual, 'w') as arquivo:
                 arquivo.write(text_space.get('1.0', END))
@@ -79,7 +80,7 @@ class Arquivo:
         self.conteudo_arquivo = text_space.get('1.0', END)[:-1]
     
     
-    def salvar_como(self, text_space):
+    def salvar_como(self, text_space: Text) -> None:
         caminho_arquivo = fd.asksaveasfilename(
             filetypes=Arquivo.filetypes,
             defaultextension='.txt'
@@ -89,7 +90,7 @@ class Arquivo:
             self.salvar_arquivo(text_space)
 
     
-    def fechar_bloco(self, text_space, root):
+    def fechar_bloco(self, text_space: Text, root: Tk) -> None:
         if self.arquivo_modificado(text_space):
             resp = mb.askyesnocancel(
                 title='Bloco de Notas',
