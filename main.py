@@ -1,3 +1,4 @@
+from Preferencias import Preferencias
 from tkinter import *
 from Arquivo import Arquivo
 from Editar import Editar
@@ -7,14 +8,18 @@ root.geometry('500x500')
 root.title('Bloco de notas')
 
 
-
-text_space = Text(root, relief=FLAT)
+text_space = Text(root, relief=FLAT, wrap=NONE)
 text_space.pack(expand=TRUE, fill=BOTH)
 
-scrollbar = Scrollbar(text_space, width=8)
-text_space.config(yscrollcommand=scrollbar.set)
-scrollbar.pack(side=RIGHT, fill=Y)
-scrollbar.config(command=text_space.yview)
+scrollbar1 = Scrollbar(text_space, width=8)
+text_space.config(yscrollcommand=scrollbar1.set)
+scrollbar1.pack(side=RIGHT, fill=Y)
+scrollbar1.config(command=text_space.yview)
+
+scrollbar2 = Scrollbar(text_space, width=8, orient='horizontal')
+text_space.config(xscrollcommand=scrollbar2.set)
+scrollbar2.pack(side=BOTTOM, fill=X)
+scrollbar2.config(command=text_space.xview)
 
 
 barra_menus = Menu(root)
@@ -35,8 +40,10 @@ menu_editar.add_command(label='Recortar', command=lambda: editar.recortar(text_s
 menu_editar.add_command(label='Copiar', command=lambda: editar.copiar(text_space))
 menu_editar.add_command(label='Colar', command=lambda: editar.colar(text_space))
 menu_editar.add_separator()
-menu_editar.add_command(label='Preferências', command=None)
+preferencias = Preferencias()
+menu_editar.add_command(label='Preferências', command=lambda: preferencias.executar(root))
 barra_menus.add_cascade(label='Editar', menu=menu_editar)
+
 root.config(menu=barra_menus)
 
 root.mainloop()

@@ -1,7 +1,6 @@
 from tkinter import *
 from pyperclip import copy, paste
 
-
 class Editar:
 
 
