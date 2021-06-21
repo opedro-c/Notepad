@@ -8,7 +8,7 @@ class Preferencias:
     def __init__(self) -> None:
         self.__fonte = 'Arial'
         self.__tamanho_fonte = '12'
-        self.__estilo_fonte = 'regular'
+        self.__estilo_fonte = ''
         self.__quebra_de_linha = NONE
         self.__tamanho_tab = 4
 
@@ -100,7 +100,7 @@ class Preferencias:
         tamanho.place(x=20, y=80, width=40)
 
         Label(lb_frame, text='Estilo', bg='white', fg='black').place(x=130, y=10)
-        estilos = ('regular', 'bold', 'italic')
+        estilos = ('', 'bold', 'italic')
         estilo = StringVar()
         estilo.set(self.estilo_fonte)
         estilo_opcao = IntVar()
