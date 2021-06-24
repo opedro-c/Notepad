@@ -74,12 +74,12 @@ class Arquivo:
                 root.title(f'Bloco de Notas - {caminho_arquivo.split("/")[-1]}')
 
     
-    def salvar_arquivo(self, text_space: Text) -> None:
+    def salvar_arquivo(self, text_space: Text, root: Tk) -> None:
         if self.arquivo_atual:
             with open(self.arquivo_atual, 'w') as arquivo:
                 arquivo.write(text_space.get('1.0', END))
         else:
-            self.salvar_como(text_space)
+            self.salvar_como(text_space, root)
         self.conteudo_arquivo = text_space.get('1.0', END)[:-1]
     
     

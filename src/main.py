@@ -1,19 +1,17 @@
 from tkinter import *
-from tkinter.font import Font
-from Arquivo import Arquivo
-from Editar import Editar
-from Preferencias import Preferencias
+from menus.Arquivo import Arquivo
+from menus.Editar import Editar
+from menus.Preferencias.Preferencias import Preferencias
+
 
 root = Tk()
 root.geometry('500x500')
 root.title('Bloco de Notas')
 
 
-text_space = Text(root, relief=FLAT, wrap=NONE, font='Arial 12')
-font = Font(font=text_space['font'])
-tab_size = font.measure('    ')
-text_space.config(tabs=tab_size)
+text_space = Text(root, relief=FLAT)
 text_space.pack(expand=TRUE, fill=BOTH)
+preferencias = Preferencias(text_space)
 
 scrollbar1 = Scrollbar(text_space, width=8)
 text_space.config(yscrollcommand=scrollbar1.set)
@@ -44,7 +42,6 @@ menu_editar.add_command(label='Recortar', command=lambda: editar.recortar(text_s
 menu_editar.add_command(label='Copiar', command=lambda: editar.copiar(text_space))
 menu_editar.add_command(label='Colar', command=lambda: editar.colar(text_space))
 menu_editar.add_separator()
-preferencias = Preferencias()
 menu_editar.add_command(label='Preferências', command=lambda: preferencias.executar(root, text_space))
 barra_menus.add_cascade(label='Editar', menu=menu_editar)
 
