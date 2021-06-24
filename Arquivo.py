@@ -1,6 +1,7 @@
 from tkinter import filedialog as fd, messagebox as mb
 from tkinter import *
 
+
 class Arquivo:
 
     filetypes = (
@@ -51,15 +52,16 @@ class Arquivo:
             return
 
 
-    def novo_arquivo(self, text_space: Text) -> None:
+    def novo_arquivo(self, text_space: Text, root: Tk) -> None:
         if self.arquivo_modificado(text_space):
             self.perguntar_salvar(text_space)
         self.conteudo_arquivo = ''
         self.arquivo_atual = ''
-        text_space.delete('1.0', END)      
+        text_space.delete('1.0', END)
+        root.title('Bloco de Notas')
 
     
-    def abrir_arquivo(self, text_space: Text) -> None:
+    def abrir_arquivo(self, text_space: Text, root: Tk) -> None:
         if self.arquivo_modificado(text_space):
             self.perguntar_salvar(text_space)
         caminho_arquivo = fd.askopenfilename(filetypes=Arquivo.filetypes)
@@ -69,6 +71,7 @@ class Arquivo:
                 self.conteudo_arquivo = arquivo.read()[:-1]
                 text_space.delete('1.0', END)
                 text_space.insert('1.0', self.conteudo_arquivo)
+                root.title(f'Bloco de Notas - {caminho_arquivo.split("/")[-1]}')
 
     
     def salvar_arquivo(self, text_space: Text) -> None:
@@ -80,7 +83,7 @@ class Arquivo:
         self.conteudo_arquivo = text_space.get('1.0', END)[:-1]
     
     
-    def salvar_como(self, text_space: Text) -> None:
+    def salvar_como(self, text_space: Text, root: Tk) -> None:
         caminho_arquivo = fd.asksaveasfilename(
             filetypes=Arquivo.filetypes,
             defaultextension='.txt'
@@ -88,6 +91,7 @@ class Arquivo:
         if caminho_arquivo:
             self.arquivo_atual = caminho_arquivo
             self.salvar_arquivo(text_space)
+            root.title(f'Bloco de Notas - {caminho_arquivo.split("/")[-1]}')
 
     
     def fechar_bloco(self, text_space: Text, root: Tk) -> None:
