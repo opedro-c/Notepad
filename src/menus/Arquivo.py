@@ -41,20 +41,20 @@ class Arquivo:
         return self.conteudo_arquivo != text_space.get('1.0', END)[:-1]
 
 
-    def perguntar_salvar(self, text_space: Text) -> None:
+    def perguntar_salvar(self, text_space: Text, root) -> None:
         confirma = mb.askyesno(
             title='Bloco de Notas', 
             message='Você deseja salvar as alterações realizadas?'
         )
         if confirma:
-            self.salvar_arquivo(text_space)
+            self.salvar_arquivo(root, text_space)
         elif confirma == None:
             return
 
 
     def novo_arquivo(self, text_space: Text, root: Tk) -> None:
         if self.arquivo_modificado(text_space):
-            self.perguntar_salvar(text_space)
+            self.perguntar_salvar(text_space, root)
         self.conteudo_arquivo = ''
         self.arquivo_atual = ''
         text_space.delete('1.0', END)
@@ -63,7 +63,7 @@ class Arquivo:
     
     def abrir_arquivo(self, text_space: Text, root: Tk) -> None:
         if self.arquivo_modificado(text_space):
-            self.perguntar_salvar(text_space)
+            self.perguntar_salvar(text_space, root)
         caminho_arquivo = fd.askopenfilename(filetypes=Arquivo.filetypes)
         if caminho_arquivo:
             self.arquivo_atual = caminho_arquivo
@@ -90,7 +90,7 @@ class Arquivo:
         )
         if caminho_arquivo:
             self.arquivo_atual = caminho_arquivo
-            self.salvar_arquivo(text_space)
+            self.salvar_arquivo(text_space, root)
             root.title(f'Bloco de Notas - {caminho_arquivo.split("/")[-1]}')
 
     
