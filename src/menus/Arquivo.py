@@ -47,7 +47,7 @@ class Arquivo:
             message='Você deseja salvar as alterações realizadas?'
         )
         if confirma:
-            self.salvar_arquivo(root, text_space)
+            self.salvar_arquivo(text_space, root)
         elif confirma == None:
             return
 
