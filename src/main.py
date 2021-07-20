@@ -43,6 +43,11 @@ menu_editar.add_separator()
 menu_editar.add_command(label='Preferências', command=lambda: preferencias.executar(root, text_space))
 barra_menus.add_cascade(label='Editar', menu=menu_editar)
 
+menu_ajuda = Menu(barra_menus, tearoff=0)
+menu_ajuda.add_command(label='Atalhos do Teclado', command=None)
+menu_ajuda.add_command(label='Sobre', command=None)
+barra_menus.add_cascade(label='Ajuda', menu=menu_ajuda)
+
 root.config(menu=barra_menus)
 
 root.mainloop()

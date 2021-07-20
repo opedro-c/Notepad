@@ -5,6 +5,7 @@ from tkinter import *
 class Arquivo:
 
     filetypes = (
+            ('Todos', '*'),
             ('Texto', '*.txt'),
             ('Python', '*.py'),
             ('Java', '*.java'),
@@ -50,6 +51,21 @@ class Arquivo:
             self.salvar_arquivo(text_space, root)
         elif confirma == None:
             return
+    
+    
+    def arquivo_ok(self, caminho_arquivo: str) -> bool:
+        try:
+            open(caminho_arquivo, 'r').read()
+        except UnicodeDecodeError:
+            mb.showerror(
+                title='Bloco de Notas',
+                message='Formato de arquivo não suportado!'
+            )
+        except (TypeError, FileNotFoundError):
+            return
+        else:
+            return True
+                
 
 
     def novo_arquivo(self, text_space: Text, root: Tk) -> None:
@@ -65,7 +81,7 @@ class Arquivo:
         if self.arquivo_modificado(text_space):
             self.perguntar_salvar(text_space, root)
         caminho_arquivo = fd.askopenfilename(filetypes=Arquivo.filetypes)
-        if caminho_arquivo:
+        if (self.arquivo_ok(caminho_arquivo)):
             self.arquivo_atual = caminho_arquivo
             with open(self.arquivo_atual, 'r') as arquivo:
                 self.conteudo_arquivo = arquivo.read()[:-1]
