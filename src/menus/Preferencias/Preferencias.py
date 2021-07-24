@@ -41,8 +41,8 @@ class Preferencias:
         }
         text.config(
             font=f'{self.preferencias["fonte"]} ' + 
-            f'{self.preferencias["tamanho"]} ' + 
-            f'{self.preferencias["estilo"]}', 
+                f'{self.preferencias["tamanho"]} ' + 
+                f'{self.preferencias["estilo"]}', 
             wrap=self.preferencias["quebra_linha"]
             )
         font = Font(font=text['font'])

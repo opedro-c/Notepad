@@ -1,16 +1,13 @@
 from tkinter import filedialog as fd, messagebox as mb
 from tkinter import *
+from typing import Union
 
 
 class Arquivo:
 
     filetypes = (
-            ('Todos', '*'),
             ('Texto', '*.txt'),
-            ('Python', '*.py'),
-            ('Java', '*.java'),
-            ('HTML', '*.html'),
-            ('JavaScript', '*.js')
+            ('Todos', '*')
         )
     
 
@@ -49,23 +46,19 @@ class Arquivo:
         )
         if confirma:
             self.salvar_arquivo(text_space, root)
-        elif confirma == None:
-            return
     
     
-    def arquivo_ok(self, caminho_arquivo: str) -> bool:
+    def arquivo_ok(self, caminho_arquivo: str) -> Union[bool, None]:
         try:
             open(caminho_arquivo, 'r').read()
+            return True
         except UnicodeDecodeError:
             mb.showerror(
                 title='Bloco de Notas',
                 message='Formato de arquivo não suportado!'
             )
         except (TypeError, FileNotFoundError):
-            return
-        else:
-            return True
-                
+            pass
 
 
     def novo_arquivo(self, text_space: Text, root: Tk) -> None:
@@ -116,8 +109,6 @@ class Arquivo:
                 title='Bloco de Notas',
                 message='Deseja salvar as alterações antes de fechar o Bloco de Notas?'
             )
-            if resp == None:
-                return
-            elif resp:
+            if resp:
                 self.salvar_arquivo(text_space, root)
-        root.quit()
+                root.quit()

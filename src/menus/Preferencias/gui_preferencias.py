@@ -1,7 +1,7 @@
 from tkinter import *
 
 
-def montar_preferencias(master: Toplevel, text: Text, preferencias: dict,aplicar_preferencias) -> None:
+def montar_preferencias(master: Toplevel, text: Text, preferencias: dict, aplicar_preferencias) -> None:
 
     master.geometry('300x400')
     master.resizable(False, False)

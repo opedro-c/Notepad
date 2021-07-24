@@ -2,24 +2,27 @@ from tkinter import *
 from menus.Arquivo import Arquivo
 from menus.Editar import Editar
 from menus.Preferencias.Preferencias import Preferencias
+from os import chdir
+from pathlib import Path
 
+chdir(Path.home())
 
 root = Tk()
 root.geometry('500x500')
 root.title('Bloco de Notas')
 
 text_space = Text(root, relief=FLAT)
-text_space.pack(expand=TRUE, fill=BOTH)
 preferencias = Preferencias(text_space)
 
-scrollbar1 = Scrollbar(text_space, width=8)
+scrollbar1 = Scrollbar(root, width=8)
 text_space.config(yscrollcommand=scrollbar1.set)
 scrollbar1.pack(side=RIGHT, fill=Y)
 scrollbar1.config(command=text_space.yview)
 
-scrollbar2 = Scrollbar(text_space, width=8, orient='horizontal')
+scrollbar2 = Scrollbar(root, width=8, orient='horizontal')
 text_space.config(xscrollcommand=scrollbar2.set)
 scrollbar2.pack(side=BOTTOM, fill=X)
+text_space.pack(expand=TRUE, fill=BOTH)
 scrollbar2.config(command=text_space.xview)
 
 barra_menus = Menu(root)

@@ -30,8 +30,8 @@ class GerenciadorJsonConfig:
             return json.load(config)
 
     @classmethod
-    def gravar_json_config(cls, conteudo: dict) -> None:
+    def gravar_json_config(cls, preferencias: dict) -> None:
         os.chdir('.config')
         with open('Notepad_preferences.json', 'w') as config:
-            json.dump(conteudo, config, indent=4)
+            json.dump(preferencias, config, indent=4)
             os.chdir('..')
