@@ -1,2 +1,0 @@
-class Sobre:
-    pass

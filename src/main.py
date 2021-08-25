@@ -5,6 +5,8 @@ from menus.Preferencias.Preferencias import Preferencias
 from os import chdir
 from pathlib import Path
 
+from menus.Sobre.Sobre import Sobre
+
 chdir(Path.home())
 
 root = Tk()
@@ -14,12 +16,12 @@ root.title('Bloco de Notas')
 text_space = Text(root, relief=FLAT)
 preferencias = Preferencias(text_space)
 
-scrollbar1 = Scrollbar(root, width=8)
+scrollbar1 = Scrollbar(root, width=14)
 text_space.config(yscrollcommand=scrollbar1.set)
 scrollbar1.pack(side=RIGHT, fill=Y)
 scrollbar1.config(command=text_space.yview)
 
-scrollbar2 = Scrollbar(root, width=8, orient='horizontal')
+scrollbar2 = Scrollbar(root, width=14, orient='horizontal')
 text_space.config(xscrollcommand=scrollbar2.set)
 scrollbar2.pack(side=BOTTOM, fill=X)
 text_space.pack(expand=TRUE, fill=BOTH)
@@ -46,10 +48,8 @@ menu_editar.add_separator()
 menu_editar.add_command(label='Preferências', command=lambda: preferencias.executar(root, text_space))
 barra_menus.add_cascade(label='Editar', menu=menu_editar)
 
-menu_ajuda = Menu(barra_menus, tearoff=0)
-menu_ajuda.add_command(label='Atalhos do Teclado', command=None)
-menu_ajuda.add_command(label='Sobre', command=None)
-barra_menus.add_cascade(label='Ajuda', menu=menu_ajuda)
+sobre = Sobre()
+barra_menus.add_command(command=lambda: sobre.sobre(root), label='Sobre')
 
 root.config(menu=barra_menus)
 

@@ -6,3 +6,9 @@ src/menus/Preferencias/__pycache__/gui_preferencias.cpython-38.pyc
 src/menus/Preferencias/__pycache__/Preferencias.cpython-38.pyc
 src/menus/Preferencias/__pycache__/GerenciadorJsonConfig.cpython-38.pyc
 .config/Notepad_preferences.json
+src/menus/Sobre/__pycache__/Sobre.cpython-39.pyc
+src/menus/Preferencias/__pycache__/gui_preferencias.cpython-39.pyc
+src/menus/Preferencias/__pycache__/Preferencias.cpython-39.pyc
+src/menus/Preferencias/__pycache__/GerenciadorJsonConfig.cpython-39.pyc
+src/menus/__pycache__/Editar.cpython-39.pyc
+src/menus/__pycache__/Arquivo.cpython-39.pyc
